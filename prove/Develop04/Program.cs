@@ -32,14 +32,19 @@ class Program
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Invalid choice. Please choose again.");
+                        Console.WriteLine("Invalid choice. Please choose 1-4.");
                         break;
                     
                 }
 
                 if (activity != null)
                 {
-                    activity.StartActivity();
+                    activity.DisplayStartingMessage();
+                    activity.Run();
+                    activity.DisplayEndingMessage();
+
+                    Console.WriteLine("Press 'Enter' to continue...");
+                    Console.ReadLine();
                 }
             }
             else
