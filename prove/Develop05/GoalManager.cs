@@ -37,7 +37,7 @@ public class GoalManager
 
     public void CreateGoal(string name, string description, int points)
     {
-        Goal newGoal = new SimpleGoal(name, description, points, GetNextId());
+        Goal newGoal = new SimpleGoal(name, description, points, GetNextId(), this);
         _goals.Add(newGoal);
     }
 
@@ -93,7 +93,7 @@ public class GoalManager
                 string description = parts[1];
                 int points = int.Parse(parts[2]);
 
-                Goal goal = new SimpleGoal(name, description, points, GetNextId());
+                Goal goal = new SimpleGoal(name, description, points, GetNextId(), this);
                 _goals.Add(goal);
             }
         }
@@ -103,7 +103,7 @@ public class GoalManager
 
     public void CreateEternalGoal(string name, string description, int points)
     {
-        Goal newGoal = new EternalGoal(name, description, points, GetNextId());
+        Goal newGoal = new EternalGoal(name, description, points, GetNextId(), this);
         _goals.Add(newGoal);
     }
 
