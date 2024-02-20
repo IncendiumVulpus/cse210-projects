@@ -4,10 +4,12 @@ using System.Collections.Generic;
 public class CharacterManager
 {
     private List<Character> _characters;
+    private List<Race> _races;
 
-    public CharacterManager()
+    public CharacterManager(List<Race> races)
     {
-        _characters = new List<Character>(); // Initialize the list in the constructor
+        _characters = new List<Character>();
+        _races = races; 
     }
 
     public void AddCharacter(Character character)
@@ -20,13 +22,23 @@ public class CharacterManager
         _characters.Remove(character);
     }
 
+    public string GetCharacterInfo(Character character)
+    {
+        return character.GetInfo();
+    }
+
     public List<Character> GetCharacters()
     {
         return _characters;
     }
 
-    public string GetCharacterInfo(Character character)
+    public List<Race> GetRaces()
     {
-        return character.GetInfo();
+        return _races;
+    }
+
+    public void AddRace(Race race)
+    {
+        _races.Add(race);
     }
 }

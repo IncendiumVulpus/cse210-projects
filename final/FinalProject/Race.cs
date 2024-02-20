@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 public class Race
@@ -21,10 +20,8 @@ public class Race
         return _name;
     }
 
-    public string GetInfo()
+    public Dictionary<string, int> GetAttributes()
     {
-        // Format attributes to string
-        string attributesString = string.Join(", ", _attributes.Select(kv => $"{kv.Key}: {kv.Value}"));
-        return $"Race: {_name}, Attributes: {attributesString}";
+        return _attributes;
     }
 }

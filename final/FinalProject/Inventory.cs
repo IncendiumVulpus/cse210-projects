@@ -7,7 +7,7 @@ public class Inventory
 
     public Inventory()
     {
-        _items = new List<Item>(); // Initialize the list in the constructor
+        _items = new List<Item>();
     }
 
     public void AddItem(Item item)
@@ -29,16 +29,10 @@ public class Inventory
         }
         return totalWeight;
     }
+}
 
-    public class Item
-    {
-        public string Name { get; set; }
-        public double Weight { get; set; }
-
-        public Item(string name, double weight)
-        {
-            Name = name;
-            Weight = weight;
-        }
-    }
+public class Item
+{
+    public string Name { get; set; }
+    public double Weight { get; set; }
 }

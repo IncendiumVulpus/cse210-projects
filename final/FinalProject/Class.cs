@@ -1,19 +1,18 @@
-using System;
 using System.Collections.Generic;
 
 public class Class
 {
     private string _name;
-    private List<string> _abilities;
+    private List<Ability> _abilities;
+
+    public Class()
+    {
+        _abilities = new List<Ability>();
+    }
 
     public void SetName(string name)
     {
         _name = name;
-    }
-
-    public void SetAbilities(List<string> abilities)
-    {
-        _abilities = abilities;
     }
 
     public string GetName()
@@ -21,10 +20,18 @@ public class Class
         return _name;
     }
 
-    public string GetInfo()
+    public void AddAbility(Ability ability)
     {
-        // Format abilities to string
-        string abilitiesString = string.Join(", ", _abilities);
-        return $"Class: {_name}, Abilities: {abilitiesString}";
+        _abilities.Add(ability);
+    }
+
+    public void SetAbilities(List<Ability> abilities)
+    {
+        _abilities = abilities;
+    }
+
+    public List<Ability> GetAbilities()
+    {
+        return _abilities;
     }
 }
