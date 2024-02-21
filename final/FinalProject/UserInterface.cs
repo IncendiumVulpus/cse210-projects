@@ -90,7 +90,6 @@ public class UserInterface
             Console.WriteLine("No classes available.");
         }
     }
-
     public void DisplayCharacters()
     {
         var characters = _characterManager.GetCharacters();
@@ -98,7 +97,25 @@ public class UserInterface
         {
             foreach (var character in characters)
             {
-                Console.WriteLine(_characterManager.GetCharacterInfo(character));
+                Console.WriteLine($"Name: {character.GetName()}, Race: {character.GetRace().GetName()}, Class: {character.GetClass().GetName()}, Level: {character.GetLevel()}, HP: {character.GetHealthPoints()}");
+
+                // Display attributes
+                Console.WriteLine("Attributes:");
+                var attributes = character.GetAttributes();
+                foreach (var attribute in attributes)
+                {
+                    Console.WriteLine($"{attribute.Key}: {attribute.Value}");
+                }
+
+                // Display abilities
+                Console.WriteLine("Abilities:");
+                var abilities = character.GetAbilities();
+                foreach (var ability in abilities)
+                {
+                    Console.WriteLine($"{ability.GetName()}: {ability.GetDescription()}");
+                }
+
+                Console.WriteLine();
             }
         }
         else

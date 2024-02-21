@@ -5,7 +5,7 @@ public class Character
 {
     private string _name;
     private Race _race;
-    private Class _class;
+    private Class _class; // Changed to private
     private int _level;
     private int _healthPoints;
     private Dictionary<string, int> _attributes;
@@ -45,6 +45,12 @@ public class Character
     public Class GetClass()
     {
         return _class;
+    }
+
+    // Public property to access _class
+    public Class CharacterClass
+    {
+        get { return _class; }
     }
 
     public void SetLevel(int level)
@@ -91,9 +97,16 @@ public class Character
     {
         string info = $"Name: {_name}, Race: {_race.GetName()}, Class: {_class.GetName()}, Level: {_level}, HP: {_healthPoints}\n";
         info += "Attributes:\n";
-        foreach (var attribute in _attributes)
+        if (_attributes != null)
         {
-            info += $"{attribute.Key}: {attribute.Value}\n";
+            foreach (var attribute in _attributes)
+            {
+                info += $"{attribute.Key}: {attribute.Value}\n";
+            }
+        }
+        else
+        {
+            info += "No attributes available\n";
         }
         info += "Abilities:\n";
         foreach (var ability in _abilities)

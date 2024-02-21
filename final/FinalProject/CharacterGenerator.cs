@@ -56,15 +56,15 @@ public class CharacterGenerator
         // Define the available classes for each race (customize as needed)
         Dictionary<string, List<Class>> raceClassMapping = new Dictionary<string, List<Class>>
         {
-            { "Dragonborn", new List<Class> { /* Add Dragonborn classes here */ } },
-            { "Dwarf", new List<Class> { /* Add Dwarf classes here */ } },
-            { "Elf", new List<Class> { /* Add Elf classes here */ } },
-            { "Gnome", new List<Class> { /* Add Gnome classes here */ } },
-            { "Half-Elf", new List<Class> { /* Add Half-Elf classes here */ } },
-            { "Halfling", new List<Class> { /* Add Halfling classes here */ } },
-            { "Half-Orc", new List<Class> { /* Add Half-Orc classes here */ } },
-            { "Human", new List<Class> { /* Add Human classes here */ } },
-            { "Tiefling", new List<Class> { /* Add Tiefling classes here */ } }
+            { "Dragonborn", new List<Class> { _classes[0], _classes[1], _classes[8], _classes[9] } },
+            { "Dwarf", new List<Class> { _classes[2], _classes[1], _classes[6] } },
+            { "Elf", new List<Class> { _classes[3], _classes[7], _classes[6], _classes[8] } },
+            { "Gnome", new List<Class> { _classes[1], _classes[6], _classes[8] } },
+            { "Half-Elf", new List<Class> { _classes[1], _classes[3], _classes[4], _classes[6], _classes[8], _classes[9] } },
+            { "Halfling", new List<Class> { _classes[1], _classes[2], _classes[6] } },
+            { "Half-Orc", new List<Class> { _classes[0], _classes[2], _classes[6] } },
+            { "Human", new List<Class> { _classes[0], _classes[1], _classes[2], _classes[3], _classes[4], _classes[5], _classes[6], _classes[7], _classes[8], _classes[9] } },
+            { "Tiefling", new List<Class> { _classes[1], _classes[2], _classes[8], _classes[9] } }
         };
 
         // Return the list of classes available for the given race
@@ -84,17 +84,41 @@ public class CharacterGenerator
         Character character = new Character();
         character.SetName(name);
         character.SetRace(race);
-        character.SetClass(characterClass);
-        character.SetLevel(level);
-        character.SetHealthPoints(10 * level);
 
-        List<Ability> classAbilities = characterClass.GetAbilities();
-        foreach (Ability ability in classAbilities)
+        if (characterClass != null) 
         {
-            character.AddAbility(ability);
+            character.SetClass(characterClass);
+            
+            // Set other character properties
+            character.SetLevel(level);
+            character.SetHealthPoints(10 * level);
+
+            // Set attributes
+            Dictionary<string, int> raceAttributes = race.GetAttributes();
+            if (raceAttributes != null)
+            {
+                character.SetAttributes(raceAttributes);
+            }
+            else
+            {
+                Console.WriteLine("Error: Race attributes are not available.");
+            }
+
+            // Add abilities
+            List<Ability> classAbilities = characterClass.GetAbilities();
+            foreach (Ability ability in classAbilities)
+            {
+                character.AddAbility(ability);
+            }
         }
+        else
+        {
+            Console.WriteLine("Error: Character class is not provided.");
+        }
+
         return character;
     }
+
 
     private Race RandomRaceWithBonuses()
     {
@@ -131,16 +155,6 @@ public class CharacterGenerator
         };
         race.SetAttributes(attributes);
         return race;
-    }
-
-    private Class RandomClass()
-    {
-        if (_classes == null || _classes.Count == 0)
-        {
-            throw new InvalidOperationException("_classes list is null or empty.");
-        }
-        int randomIndex = _random.Next(_classes.Count);
-        return _classes[randomIndex];
     }
 
     public List<Class> GetClasses()
