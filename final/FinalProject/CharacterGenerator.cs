@@ -153,7 +153,7 @@ public class CharacterGenerator
             { "Wisdom", _random.Next(1, 21) + abilityBonuses[4] },
             { "Charisma", _random.Next(1, 21) + abilityBonuses[5] }
         };
-        race.SetAttributes(attributes);
+        race.SetAttributes(attributes); // Set attributes for the race instance
         return race;
     }
 
